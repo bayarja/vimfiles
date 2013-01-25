@@ -79,6 +79,10 @@ if has("autocmd")
 
   " mark Jekyll YAML frontmatter as comment
   au BufNewFile,BufRead *.{md,markdown,html,xml} sy match Comment /\%^---\_.\{-}---$/
+
+
+  " Intentamos compartir los snippets de html con handlebars
+  au BufNewFile,BufRead *.{handlebars,hbs,hb} set ft=handlebars.html
 endif
 
 " don't use Ex mode, use Q for formatting
