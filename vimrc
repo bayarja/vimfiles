@@ -85,6 +85,10 @@ if has("autocmd")
   au BufNewFile,BufRead *.{handlebars,hbs,hb} set ft=handlebars.html
   " Y los mismo con *.jst.ejs templates
   au BufNewFile,BufRead *.ejs set ft=jst.html
+  " Y tambien  *.jst.eco templates
+  au BufNewFile,BufRead *.jst.eco set ft=jst.html
+
+  au BufNewFile,BufRead *.mobile.erb set ft=html
 endif
 
 " don't use Ex mode, use Q for formatting
