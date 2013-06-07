@@ -19,7 +19,9 @@ set term=gnome-256color
 colorscheme ir_dark
 "set guifont=Inconsolata\ Medium
 
-set nonumber    " line numbers aren't needed
+" set nonumber    " line numbers aren't needed
+set relativenumber
+
 set ruler       " show the cursor position all the time
 set cursorline  " highlight the line of the cursor
 set showcmd     " show partial commands below the status line
@@ -58,6 +60,7 @@ function s:setupWrapping()
   set wrapmargin=2
   set textwidth=80
 endfunction
+
 
 if has("autocmd")
   " In Makefiles, use real tabs, not tabs expanded to spaces
@@ -99,6 +102,8 @@ map Q gq
 
 let mapleader=","
 
+nmap <leader>m :NERDTreeToggle<cr>
+
 " paste lines from unnamed register and fix indentation
 nmap <leader>p pV`]=
 nmap <leader>P PV`]=
@@ -117,6 +122,8 @@ map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
 
 let g:CommandTMaxHeight=10
 let g:CommandTMinHeight=4
+" let g:CommandTAcceptSelectionSplitMap=['<CR>', '<C-s>']
+let g:CommandTAcceptSelectionSplitMap=['<C-g>']
 
 " ignore Rubinius, Sass cache files
 set wildignore+=tmp/**,*.rbc,.rbx,*.scssc,*.sassc
@@ -159,7 +166,27 @@ if has("statusline") && !&cp
   set statusline+=[%b][0x%B]
 endif
 
+"From jose mota"
 nnoremap <leader>rs :!clear;rspec --color spec<CR>
 
 "Configuración para Ack en Ubuntu
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+
+
+" Gestión de numeración de lineas
+" http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunction
+
+nnoremap <C-n> :call NumberToggle()<cr>
+
+:au FocusLost * :set number
+:au FocusGained * :set relativenumber
+ 
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
