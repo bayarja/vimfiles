@@ -179,3 +179,7 @@ nnoremap <C-n> :call NumberToggle()<cr>
  
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
+
+"some stuff to get the mouse going in term
+set mouse=a
+set ttymouse=xterm2
